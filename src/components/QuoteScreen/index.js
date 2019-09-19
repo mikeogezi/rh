@@ -4,7 +4,7 @@ import {
 } from "react-native";
 
 export default class QuoteScreen extends React.Component {
-  public render() {
+  render() {
     return (
       <View></View>
     );
