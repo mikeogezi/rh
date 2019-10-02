@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.reliancehmo.models.Provider;
 
 import java.util.List;
@@ -56,6 +57,12 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderHolder> {
             holder.addressTV.setText(provider.getAddress());
             holder.stateTV.setText(provider.getState());
         }
+
+        Glide
+            .with(context)
+            .load(provider.getImageUrl())
+            .placeholder(R.color.md_blue_grey_300)
+            .into(holder.imageView);
     }
 
     @Override
