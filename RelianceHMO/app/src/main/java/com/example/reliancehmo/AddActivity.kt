@@ -100,23 +100,38 @@ class AddActivity : AppCompatActivity() {
             val call = APIFactory.getService().addProvider(provider)
             val ex = call.execute()
 
-            runOnUiThread {
-                if (ex.isSuccessful && ex.body()?.isSuccess() == true) {
-                    val res = ex.body()
-                    Log.d(TAG, Gson().toJson(res))
-                    Toast.makeText(this, "Successfully added provider...", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Error adding provider...", Toast.LENGTH_LONG).show()
-                }
+            try {
+                runOnUiThread {
+                    if (ex.isSuccessful && ex.body()?.isSuccess() == true) {
+                        val res = ex.body()
+                        Log.d(TAG, Gson().toJson(res))
+                        Toast.makeText(this, "Successfully added provider...", Toast.LENGTH_LONG)
+                            .show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        onErrors()
+                    }
 
-                try {
-                    progressDialog.dismiss()
+                    try {
+                        progressDialog.dismiss()
+                    } catch (e: Exception) {
+                    }
                 }
-                catch (e: Exception) {}
             }
+            catch (e: Exception) {
+                onErrors()
+            }
+        }
+    }
+
+    fun onErrors () {
+        runOnUiThread {
+            try {
+                Toast.makeText(this, "Error searching providers...", Toast.LENGTH_LONG)
+                    .show()
+            } catch (e: Exception) { }
         }
     }
 

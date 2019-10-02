@@ -60,19 +60,42 @@ class SearchActivity : AppCompatActivity() {
             val ex = call.execute()
 
             runOnUiThread {
-                if (ex.isSuccessful && ex.body()?.isSuccess() == true) {
-                    val res = ex.body()
-                    showProviders(res!!.data)
-                    Log.d(AddActivity.TAG, Gson().toJson(res))
-                    Toast.makeText(this, "Successfully found provider...", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this, "Error searching providers...", Toast.LENGTH_LONG).show()
-                }
-
                 try {
-                    progressDialog.dismiss()
+                    if (ex.isSuccessful && ex.body()?.isSuccess() == true) {
+                        val res = ex.body()
+                        showProviders(res!!.data)
+                        Log.d(AddActivity.TAG, Gson().toJson(res))
+                        if (res!!.data.isEmpty()) {
+                            Toast.makeText(this, "No providers found...", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Successfully found provider...",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                        }
+                    } else {
+                        onErrors()
+                    }
+
+                    try {
+                        progressDialog.dismiss()
+                    } catch (e: Exception) {}
                 }
-                catch (e: Exception) {}
+                catch (e: Exception) {
+                    onErrors()
+                }
+            }
+        }
+    }
+
+    fun onErrors () {
+        runOnUiThread {
+            try {
+                Toast.makeText(this, "Error searching providers...", Toast.LENGTH_LONG)
+                    .show()
+            } catch (e: Exception) {
             }
         }
     }

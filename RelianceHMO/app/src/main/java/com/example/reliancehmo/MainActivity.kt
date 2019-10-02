@@ -15,6 +15,7 @@ import com.example.reliancehmo.models.Provider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_search.*
 import java.lang.Exception
 
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                     val res = ex.body()
                     renderProviders(res!!.data)
                     Log.d(AddActivity.TAG, Gson().toJson(res))
-                    Toast.makeText(this, "Successfully found provider...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Successfully found providers...", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this, "Error searching providers...", Toast.LENGTH_LONG).show()
                 }
@@ -102,8 +103,8 @@ class MainActivity : AppCompatActivity() {
             if (providers == null) {
                 fetchProviders()
             } else {
-                val adapter = ProviderAdapter(this, providers)
-                val manager = LinearLayoutManager(this)
+                val adapter = ProviderAdapter(this, providers.reversed())
+                val manager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
 
                 val providerRV = findViewById<RecyclerView>(R.id.provider_rv)
                 providerRV.adapter = adapter
