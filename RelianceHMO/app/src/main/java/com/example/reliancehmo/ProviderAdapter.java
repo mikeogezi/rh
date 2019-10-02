@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -58,11 +59,9 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderHolder> {
             holder.stateTV.setText(provider.getState());
         }
 
-        Glide
-            .with(context)
-            .load(provider.getImageUrl())
-            .placeholder(R.color.md_blue_grey_300)
-            .into(holder.imageView);
+        Glide.with(context.getApplicationContext())
+                .load(provider.getImageUrl())
+                .into(holder.imageView);
     }
 
     @Override
