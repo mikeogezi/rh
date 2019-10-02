@@ -4,15 +4,18 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "prebuild": "",
-    "build": "",
-    "prestart": "yarn build",
-    "start": "react-native start",
+    "build": "react-native bundle --entry-file ./index.js --platform ios --bundle-output ios/main.jsbundle",
+    "prestart": "reset && yarn build",
+    "start": "yarn test && react-native run-ios",
+    "pods": "cd ios && rm Podfile.lock && pod install && cd ..",
+    "postinstall": "yarn pods",
     "test": "jest --forceExit"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "react": "16.8.6",
     "react-native": "0.60.5",
+    "react-native-gesture-handler": "^1.4.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-navigation": "^4.0.5",
     "react-navigation-stack": "^1.8.0"

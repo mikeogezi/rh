@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">RelianceHMO</string>
+    <string name="title_activity_search">Search Providers</string>
+    <string name="title_activity_add">Add Provider</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>
