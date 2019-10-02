@@ -20,10 +20,6 @@ import com.example.reliancehmo.models.Provider;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by michael on 4/11/18.
- */
-
 public class ProviderAdapter extends RecyclerView.Adapter<ProviderHolder> {
     private List<Provider> providers;
     private Context context;

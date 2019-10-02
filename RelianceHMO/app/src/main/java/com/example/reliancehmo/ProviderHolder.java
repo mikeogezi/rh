@@ -11,10 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reliancehmo.models.Provider;
 
-/**
- * Created by michael on 4/11/18.
- */
-
 public class ProviderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private Context context;
     private Provider provider;
